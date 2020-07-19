@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const customModalStyle = {
   content: {
-    top: '50%',
+    top: '45%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
@@ -18,20 +18,20 @@ export const Container = styled.div`
   min-width: 420px;
 
   header {
+    margin-bottom: 8px;
+
     strong {
       font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 16px;
     }
   }
 
   span {
-    color: #8f8a9b;
-    margin: 16px 0 5px;
+    color: #170c3a;
     font-size: 18px;
-  }
-
-  input {
-    padding: 5px;
-    font-size: 16px;
+    display: inline-block;
+    margin-top: 8px;
   }
 
   button {

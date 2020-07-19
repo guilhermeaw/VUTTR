@@ -3,7 +3,7 @@ import React, { ButtonHTMLAttributes } from 'react';
 import { Container } from './styles';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonType: 'add' | 'delete';
+  buttonType: 'add' | 'delete' | 'generic';
 }
 
 const Button: React.FC<ButtonProps> = ({ children, buttonType, ...rest }) => {
