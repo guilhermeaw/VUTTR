@@ -46,7 +46,13 @@ const Home: React.FC = () => {
       setTools(response.data);
     }
 
-    loadTools();
+    const debouncer = setTimeout(() => {
+      loadTools();
+    }, 500);
+
+    return () => {
+      clearTimeout(debouncer);
+    };
   }, [inputValue, isTagSearch]);
 
   const handleInputChange = useCallback(
@@ -83,15 +89,9 @@ const Home: React.FC = () => {
   const handleRemoveTool = useCallback(
     async (toolId: number) => {
       await api.delete(`/tools/${toolId}`);
+
       toggleRemoveTool();
-
-      const updatedTools = tools?.filter(tool => {
-        if (tool.id !== toolId) {
-          return tool;
-        }
-      });
-
-      setTools(updatedTools);
+      setTools(tools.filter(tool => tool.id !== toolId));
     },
     [toggleRemoveTool, tools],
   );
