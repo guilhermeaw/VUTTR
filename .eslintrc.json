@@ -41,6 +41,7 @@
       "import/prefer-default-export": "off",
       "import/no-duplicates": "off",
       "@typescript-eslint/camelcase": "off",
+      "jsx-a11y/label-has-associated-control": "off",
       "@typescript-eslint/explicit-function-return-type": [
         "error",
         {
@@ -62,4 +63,3 @@
       }
     }
   }
-  

@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import ReactModal from 'react-modal';
+import { AxiosResponse } from 'axios';
 
 import {
   Container,
@@ -27,21 +28,26 @@ interface Tool {
 }
 
 const Home: React.FC = () => {
-  const [tools, setTools] = useState<Tool[]>();
+  const [tools, setTools] = useState<Tool[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsfocused] = useState(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState(false);
+  const [isTagSearch, setIsTagSearch] = useState(false);
 
   useEffect(() => {
     async function loadTools(): Promise<void> {
-      const response = await api.get('/tools');
+      let response = {} as AxiosResponse;
+
+      isTagSearch
+        ? (response = await api.get(`/tools?tags_like=${inputValue}`))
+        : (response = await api.get(`/tools?title_like=${inputValue}`));
 
       setTools(response.data);
     }
 
     loadTools();
-  }, []);
+  }, [inputValue, isTagSearch]);
 
   const handleInputChange = useCallback(
     (event: React.FormEvent<HTMLInputElement>) => {
@@ -58,13 +64,41 @@ const Home: React.FC = () => {
     setIsfocused(false);
   }, []);
 
-  const handleAddTool = useCallback(() => {
+  const toggleAddTool = useCallback(() => {
     setIsAddModalOpen(!isAddModalOpen);
   }, [isAddModalOpen]);
 
-  const handleRemoveTool = useCallback(() => {
+  const handleAddTool = useCallback(
+    (tool: Tool) => {
+      toggleAddTool();
+      setTools([...tools, tool]);
+    },
+    [toggleAddTool, tools],
+  );
+
+  const toggleRemoveTool = useCallback(() => {
     setIsRemoveModalOpen(!isRemoveModalOpen);
   }, [isRemoveModalOpen]);
+
+  const handleRemoveTool = useCallback(
+    async (toolId: number) => {
+      await api.delete(`/tools/${toolId}`);
+      toggleRemoveTool();
+
+      const updatedTools = tools?.filter(tool => {
+        if (tool.id !== toolId) {
+          return tool;
+        }
+      });
+
+      setTools(updatedTools);
+    },
+    [toggleRemoveTool, tools],
+  );
+
+  const toggleCheckbox = useCallback(() => {
+    setIsTagSearch(!isTagSearch);
+  }, [isTagSearch]);
 
   return (
     <Container>
@@ -84,19 +118,20 @@ const Home: React.FC = () => {
             isFocused={isFocused}
             placeholder="Buscar..."
           />
-          <span>
-            <Checkbox type="checkbox" />
+          <label>
+            <Checkbox onChange={toggleCheckbox} type="checkbox" />
             Buscar apenas por tags
-          </span>
+          </label>
         </div>
 
-        <Button buttonType="add" onClick={handleAddTool}>
+        <Button buttonType="add" onClick={toggleAddTool}>
           Adicionar
         </Button>
         <AddToolModal
           ariaHideApp={false}
-          onRequestClose={handleAddTool}
+          onRequestClose={toggleAddTool}
           isOpen={isAddModalOpen}
+          onRequestSubmit={handleAddTool}
         />
       </SearchArea>
 
@@ -106,14 +141,14 @@ const Home: React.FC = () => {
             <ToolBox key={tool.id}>
               <header>
                 <a href={tool.link}>{tool.title}</a>
-                <Button buttonType="delete" onClick={handleRemoveTool}>
+                <Button buttonType="delete" onClick={toggleRemoveTool}>
                   Remover
                 </Button>
                 <ReactModal
-                  onRequestClose={handleRemoveTool}
+                  ariaHideApp={false}
+                  onRequestClose={toggleRemoveTool}
                   isOpen={isRemoveModalOpen}
                   style={customModalStyle}
-                  ariaHideApp={false}
                 >
                   <RemoveModalContent>
                     <h3>Remover ferramenta</h3>
@@ -121,24 +156,26 @@ const Home: React.FC = () => {
                       Você tem certeza que deseja remover essa ferramenta?
                     </span>
                     <footer>
-                      <Button onClick={handleRemoveTool} buttonType="generic">
+                      <Button onClick={toggleRemoveTool} buttonType="generic">
                         Cancelar
                       </Button>
-                      <Button buttonType="add">Confirmar</Button>
+                      <Button
+                        onClick={() => handleRemoveTool(tool.id)}
+                        buttonType="add"
+                      >
+                        Confirmar
+                      </Button>
                     </footer>
                   </RemoveModalContent>
                 </ReactModal>
               </header>
 
-              <p>
-                Essa é uma ferramenta para gerenciar anotações variadas sobre
-                qualquer assunto
-              </p>
+              <p>{tool.description}</p>
 
               <footer>
-                <strong>#anotacoes</strong>
-                <strong>#utilidades</strong>
-                <strong>#geral</strong>
+                {tool.tags.map(tag => (
+                  <strong key={tool.id + tag}>#{tag}</strong>
+                ))}
               </footer>
             </ToolBox>
           ))}

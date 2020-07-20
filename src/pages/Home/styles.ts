@@ -38,8 +38,9 @@ export const SearchArea = styled.div`
   flex-direction: row;
   justify-content: space-between;
 
-  span {
+  label {
     display: inline-block;
+    cursor: pointer;
   }
 `;
 
@@ -49,6 +50,7 @@ export const SearchField = styled.input<InputProps>`
   background-color: #f5f4f6;
   border: 1px #ebeaed solid;
   margin-right: 32px;
+  margin-bottom: 8px;
   transition: all 0.2s;
 
   ${props =>
@@ -78,7 +80,7 @@ export const AddButton = styled.button`
 `;
 
 export const ToolsList = styled.div`
-  padding: 32px 0;
+  padding: 24px 0;
 
   display: flex;
   flex-direction: column;
@@ -118,6 +120,7 @@ export const ToolBox = styled.div`
 
     strong {
       font-weight: bold;
+      display: inline-block;
 
       & + strong {
         margin-left: 8px;
