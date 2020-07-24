@@ -4,6 +4,10 @@ A VUTTR é uma aplicação para gerenciamento de ferramentas, que permite listar
 
 ## :book: Sumário
 
+* [Dependências](https://github.com/guilhermeaw/VUTTR#gear-depend%C3%AAncias)
+* [Guia de Instalação](https://github.com/guilhermeaw/VUTTR#rocket-guia-de-instala%C3%A7%C3%A3o)
+* [Funcionalidades](https://github.com/guilhermeaw/VUTTR#bulb-funcionalidades)
+
 ## :gear: Dependências
 
 * [Node](https://nodejs.org/en/) (12.14.0 ou maior)
