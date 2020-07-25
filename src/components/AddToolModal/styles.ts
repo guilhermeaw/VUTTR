@@ -27,14 +27,14 @@ export const Container = styled.div`
     }
   }
 
-  span {
+  label {
     color: #170c3a;
     font-size: 18px;
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 16px;
   }
 
   button {
-    margin-top: 16px;
+    margin-top: 24px;
   }
 `;

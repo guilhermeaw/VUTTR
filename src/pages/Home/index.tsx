@@ -15,7 +15,7 @@ import {
 
 import { customModalStyle } from './styles';
 
-import AddToolModal from './components/AddToolModal';
+import AddToolModal from '../../components/AddToolModal';
 import Button from '../../components/Button';
 import api from '../../services/api';
 
@@ -37,7 +37,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     async function loadTools(): Promise<void> {
-      let response = {} as AxiosResponse;
+      let response = {} as AxiosResponse<Tool[]>;
 
       isTagSearch
         ? (response = await api.get(`/tools?tags_like=${inputValue}`))
@@ -111,6 +111,7 @@ const Home: React.FC = () => {
         <div>
           <SearchField
             type="text"
+            name="searchField"
             value={inputValue}
             onChange={handleInputChange}
             onFocus={handleInputFocus}

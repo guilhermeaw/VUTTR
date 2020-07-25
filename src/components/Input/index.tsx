@@ -9,11 +9,11 @@ import React, {
 import { IconBaseProps } from 'react-icons';
 import { useField } from '@unform/core';
 
-import { Container } from './styles';
+import { Container, ErrorMessage } from './styles';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  containerStyle?: object;
+  containerStyle?: Record<string, unknown>;
   icon?: React.ComponentType<IconBaseProps>;
 }
 
@@ -47,23 +47,30 @@ const Input: React.FC<InputProps> = ({
   }, [fieldName, registerField]);
 
   return (
-    <Container
-      isErrored={!!error}
-      isFilled={isFilled}
-      isFocused={isFocused}
-      style={containerStyle}
-      data-testid="input-container"
-    >
-      {Icon && <Icon size={20} />}
+    <>
+      <Container
+        isErrored={!!error}
+        isFilled={isFilled}
+        isFocused={isFocused}
+        style={containerStyle}
+        data-testid="input-container"
+      >
+        {Icon && <Icon size={20} />}
 
-      <input
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        defaultValue={defaultValue}
-        ref={inputRef}
-        {...rest}
-      />
-    </Container>
+        <input
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          defaultValue={defaultValue}
+          ref={inputRef}
+          {...rest}
+        />
+      </Container>
+      {error && (
+        <ErrorMessage>
+          <span>{error}</span>
+        </ErrorMessage>
+      )}
+    </>
   );
 };
 

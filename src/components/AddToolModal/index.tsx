@@ -4,11 +4,11 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 
-import getValidationErrors from '../../../../utils/getValidationErrors';
-import api from '../../../../services/api';
+import getValidationErrors from '../../utils/getValidationErrors';
+import api from '../../services/api';
 
-import Button from '../../../../components/Button';
-import Input from '../../../../components/Input';
+import Button from '../Button';
+import Input from '../Input';
 
 import { Container } from './styles';
 import { customModalStyle } from './styles';
@@ -71,25 +71,25 @@ const AddModal: React.FC<ModalProps> = ({
 
   return (
     <Modal style={customModalStyle} isOpen={isOpen} {...rest}>
-      <Container>
+      <Container data-testid="addToolModal-container">
         <header>
           <strong>Adicionar uma nova ferramenta</strong>
         </header>
 
         <Form ref={formRef} onSubmit={handleAddTool}>
-          <span>Nome da ferramenta *</span>
+          <label>Nome da ferramenta *</label>
           <Input name="title" />
 
-          <span>Link da ferramenta *</span>
+          <label>Link da ferramenta *</label>
           <Input name="link" />
 
-          <span>Descrição da ferramenta *</span>
+          <label>Descrição da ferramenta *</label>
           <Input name="description" />
 
-          <span>Tags *</span>
+          <label>Tags *</label>
           <Input name="tags" />
 
-          <Button type="submit" buttonType="add">
+          <Button data-testid="addTool-button" type="submit" buttonType="add">
             Adicionar
           </Button>
         </Form>

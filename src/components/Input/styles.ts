@@ -55,3 +55,10 @@ export const Container = styled.div<ContainerProps>`
     margin-right: 16px;
   }
 `;
+
+export const ErrorMessage = styled.span`
+  position: absolute;
+  right: 40px;
+  color: #f95e5a;
+  font-size: 12px;
+`;
