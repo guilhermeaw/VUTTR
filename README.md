@@ -66,7 +66,7 @@ Filtrar ferramentas pelas tags:
 
 Adicionar novas ferramentas:
 
-![Add-tool](https://i.imgur.com/1Xlj5u4.gif)
+![Add-tool](https://i.imgur.com/P1CcRlD.gif)
 
 Remover ferramentas:
 
