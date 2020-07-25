@@ -42,11 +42,35 @@ Compilar e minificar para produção:
 yarn build
 ```
 
+### Executando os testes
+
+Executar os testes:
+```
+yarn test
+```
+
+Executar os testes e gerar o coverage
+```
+yarn test:coverage
+```
+
 ## :bulb: Funcionalidades
 
-Filtrar ferramentas pelo título ou pelas tags
+Filtrar ferramentas pelo título:
 
-![Filtros](https://i.imgur.com/iI9nYUX.gif)
+![Title-Filter](https://i.imgur.com/XnNFcx5.gif)
+
+Filtrar ferramentas pelas tags:
+
+![Tag-Filter](https://i.imgur.com/doUFjRv.gif)
+
+Adicionar novas ferramentas:
+
+![Add-tool](https://i.imgur.com/1Xlj5u4.gif)
+
+Remover ferramentas:
+
+![Remove-tool](https://i.imgur.com/fUj6Qc8.gif)
 
 ---
 
