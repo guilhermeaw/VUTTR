@@ -9,6 +9,10 @@ export const customModalStyle = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
+
+  overlay: {
+    background: '#170C3AE6',
+  },
 };
 
 export const Container = styled.div`

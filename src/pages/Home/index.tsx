@@ -48,7 +48,7 @@ const Home: React.FC = () => {
 
     const debouncer = setTimeout(() => {
       loadTools();
-    }, 500);
+    }, 200);
 
     return () => {
       clearTimeout(debouncer);
