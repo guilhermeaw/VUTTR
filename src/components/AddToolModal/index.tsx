@@ -78,16 +78,22 @@ const AddModal: React.FC<ModalProps> = ({
 
         <Form ref={formRef} onSubmit={handleAddTool}>
           <label>Nome da ferramenta *</label>
-          <Input name="title" />
+          <Input name="title" placeholder="EX: Yarn" />
 
           <label>Link da ferramenta *</label>
-          <Input name="link" />
+          <Input name="link" placeholder="EX: https://yarnpkg.com/" />
 
           <label>Descrição da ferramenta *</label>
-          <Input name="description" />
+          <Input
+            name="description"
+            placeholder="EX: Yarn is a package manager"
+          />
 
           <label>Tags *</label>
-          <Input name="tags" />
+          <Input
+            name="tags"
+            placeholder="EX: package-manager innovation react"
+          />
 
           <Button data-testid="addTool-button" type="submit" buttonType="add">
             Adicionar

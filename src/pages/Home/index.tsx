@@ -101,7 +101,7 @@ const Home: React.FC = () => {
   }, [isTagSearch]);
 
   return (
-    <Container>
+    <Container data-testid="home-page-container">
       <TitleBox>
         <h1>VUTTR</h1>
         <h2>Very Useful Tools to Remember</h2>
